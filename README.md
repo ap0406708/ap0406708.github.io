@@ -1,240 +1,212 @@
-[![Blog Demo](https://img.shields.io/badge/demo-golasblog-blue?style=flat-square)](https://golas.blog/)
-[![Generic Demo](https://img.shields.io/badge/demo-generic-green?style=flat-square)](https://simplex-demo.golas.systems/)
+# Not Pure Poole <!-- omit in toc -->
 
-The source of the generic demo is available here: https://github.com/andreondra/simplex-demo
-
-# <img src="assets/img/icons/simplex_logo.svg" alt="Simplex" height="50"/>
-
-A *simple* yet neat blogging theme. Developed for the [golas blog](https://golas.blog/) project.
-
-
-## 👓 Preview
-![Preview](preview.gif)
-
-## 💎 Features
-### Responsive
-![Responsivity preview](previewResponsive.gif)
-
-### Dark mode
-![Dark mode preview](previewDark.gif)
-
-### Buttons
-![Buttons preview](previewButtons.png)
-
-### Lity Lightbox 
-Supports images, videos, iFrames and more. See below for syntax.
-
-### Open Graph tags
-
-## ℹ Installation
-
-Add this line to your Jekyll site's `Gemfile`:
-
-```ruby
-gem "jekyll-theme-simplex"
-```
-
-And add this line to your Jekyll site's `_config.yml`:
-
-```yaml
-theme: jekyll-theme-simplex
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install jekyll-theme-simplex
-
-## ✔ Usage
-
-### ⚙ Setting up the template
-Add following to the `_config.yml`:
-```yaml
-logo_img: /assets/img/icons/golasblog_logo.svg #Absolute path to the logo. If not specified, the title will be displayed instead.
-copyright: © Golasowski 2020 #Your copyright.
-
-collections:
-    category:
-        output: true
-    authors:
-        output: false
-
-defaults:
-  -
-    scope:
-      path: ""
-      type: category
-    values:
-      layout: "category"
-```
-
-### ✨ Defining categories
-Create a `_category` folder in the root directory of the blog. Create a `.md` file for every category with the contents:
-```
----
-category: [design] #Category ID.
-hue: var(--c-themeHueOrange) #Category hue. See note [1].
-title: Design #Category title.
-description: Lorem ipsum dolor sit amet.
----
-```
-
-### 🤵 Defining authors
-Create a `_authors` folder in the root directory. Create a `.md` file for every author with the contents:
-```
----
-nick: golas #Author's nick.
-full_name: Andrew Golasowski #Author's full name.
-photo_dir: assets/img/authors/golas.png #Path to the author's pic.
----
-```
-
-### 📰 Defining the menu
-Create a `_data` folder in the root directory. In the folder, create a `nav.yaml` file. Here's an example:
-```yaml
-- title: Programming #Menu item title.
-  url: category/programming.html #Menu item url.
-  icon: assets/img/icons/programming.svg #Menu item icon.
-  hue: "var(--c-themeHueRed)" #Menu item hue - see note [1].
-  subnav: #Subnav. See note [2].
-      - title: C++ #Submenu item title.
-        url: category/cpp.html #Submenu item url.
-        hue: "var(--c-themeHueOrange)" #Submenu item hue.
-        subnav: #Another subnav
-            - title: Libraries
-              url: libs.html
-              hue: "var(--c-themeHueBlue)"
-- title: Design
-  url: category/design.html
-  icon: assets/img/icons/design.svg
-  hue: "var(--c-themeHueRed)"
-```
-#### Pro tip:
-Use color icons with the same hue as the menu items. Icons will be black and on hover the color will be shown.
-
-### ✒ Creating posts
-Posts are created in the `_posts` directory. Following front matter attributes are supported:
-```
----
-layout: post #Do not change.
-category: [programming, testing] #One, more categories or no at all.
-title: "Lorem ipsum" #Article title.
-author: andy #Author's nick.
-nextPart: _posts/2021-01-30-example.md #Next part.
-prevPart: _posts/2021-01-30-example.md #Previous part.
-og_image: assets/example.png #Open Graph preview image.
-og_description: "Example description." #Open Graph description.
-fb_app_id: example
----
-Your markdown content here.
-```
-
-### ⚡ Syntax highlighting
-The theme uses Pygments CSS created by [@richleland](https://github.com/richleland). If you want to modify the highlighting styles, just download different CSS or create your own - see [Jekyll docs](https://jekyllrb.com/docs/liquid/tags/#stylesheets-for-syntax-highlighting).
-
-Note - `@media` is used to manage different styles for light and dark web browser mode. See `_variables.scss` file for details.
-
-### 📷 Inserting pictures
-Classic Markdown syntax is supported. However, to be able to use the lightbox feature, you have to use HTML syntax. Minimal example:
-```html
-<a href="/assets/example.jpg" data-lity>
-  <img src="/assets/example_thumbnail.jpg"/>
+<a href="https://jekyll-themes.com">
+  <img src="https://img.shields.io/badge/featured%20on-JekyllThemes-red.svg" height="20" alt="Jekyll Themes Shield" >
 </a>
-```
 
-To provide image description use this syntax:
-```html
-<div class="sx-picture">
-  <a href="/assets/example.jpg" data-lity>
-    <img src="/assets/example_thumbnail.jpg"/>
-  </a>
-  <span class="sx-subtitle">My picture description.</span>
-</div>
-```
+**Not Pure Poole** is a simple, beautiful, and powerful Jekyll theme for blogs. It is built on [Poole](https://github.com/poole/poole) and [Pure](https://purecss.io/).
 
-**Do not forget the `data-lity` attribute.**
+> Poole explains that Jekyll has been asking for a particular chemical for days now but every time it has been fetched for him he rejects it as **not pure**. Poole also explains that he caught a glimpse of the man inside and he looked barely human.
+>
+> -- <a href="https://www.bbc.co.uk/bitesize/guides/zbtjnrd/revision/6"><cite>The death of Jekyll</cite></a>
 
-#### ↔ Centering
-To center pictures, put the code inside a `div` with `sx-center` class like this:
-```html
-<div markdown=1 class="sx-center">
-  ![My picture](/assets/example.jpg)
-</div>
-```
+-----
 
-### 🔘 Buttons
-Buttons can be inserted with the following syntax. Just replace `theme` with `red`, `green`, `blue`, `orange`, `purple` or `brown`, specify the target link in `href` attribute and the icon in `src` attribute.
-```html
-<div class='sx-button'>
-  <a href='https://your.link.here.example.com/' class='sx-button__content theme'>
-    <img src='/assets/img/icons/example_icon.svg'/>#{text}
-  </a>
-</div>
-```
+See Not Pure Poole in action with [the demo site](https://vszhub.github.io/not-pure-poole/).
 
-Markdown attribute can be omitted if you don't use markdown inside the block (e.g. by using the lightbox syntax).
+![Screenshot](screenshot.png)
 
-### ℹ Notes
-[1] Hue can be either one of the predefined colors or any of the CSS `color` attribute supported values (hex, rgb...).
+## Table of Contents <!-- omit in toc -->
 
-[2] Submenus are generated recursively, so any menu (and submenu) can have its own submenu.
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Customizing Head](#customizing-head)
+  - [Creating Themes](#creating-themes)
+  - [Customizing Navigation](#customizing-navigation)
+  - [Customizing Cover Image](#customizing-cover-image)
+  - [Customizing Social Links](#customizing-social-links)
+  - [Enabling Posts Archive](#enabling-posts-archive)
+  - [Enabling TOC](#enabling-toc)
+  - [Enabling MathJax](#enabling-mathjax)
+  - [Something More](#something-more)
+- [Development](#development)
+- [License](#license)
 
-#### Predefined colors
-You can use following predefined colors:
+## Features
+
+- [Jekyll SEO Tag](https://github.com/jekyll/jekyll-seo-tag)
+- [Jekyll Feed](https://github.com/jekyll/jekyll-feed)
+- [Jekyll Sitemap](https://github.com/jekyll/jekyll-sitemap)
+- [Jekyll Gist](https://github.com/jekyll/jekyll-gist)
+- [Google Analytics](https://analytics.google.com/)
+- [Disqus](https://disqus.com/)
+- [Font Awesome](https://fontawesome.com/)
+- [MathJax](https://www.mathjax.org/)
+- Dark mode (enabled automatically via CSS media query)
+- Posts archive by dates, categories, and tags
+- Pagination, generated by [Jekyll Paginate](https://github.com/jekyll/jekyll-paginate)
+- TOC (generated by Vladimir "allejo" Jimenez's [jekyll-toc](https://github.com/allejo/jekyll-toc))
+- Related posts (time-based, because Jekyll) below each post
+- Mobile friendly design and development
+- Easily scalable text and component sizing with `rem` units in the CSS
+- Support for a wide gamut of HTML elements
+- Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)
+
+## Installation
+
+You can choose one of the following methods to install Not Pure Poole:
+
+- Directly specify the `not-pure-poole` gem.
+
+    1. Add `gem 'not-pure-poole'` into your `Gemfile`.
+    2. Add the below lines into your `_config.yml`.
+
+        ```yml
+        plugins:
+          - not-pure-poole
+        ```
+
+- If your site is hosted on GitHub Pages, you can use [`jekyll-remote-theme`](https://github.com/benbalter/jekyll-remote-theme) to import the master branch of Not Pure Poole.
+
+    1. Add `gem 'jekyll-remote-theme'` into your `Gemfile`.
+    2. Add the below lines into your `_config.yml`.
+
+        ```yml
+        plugins:
+          - jekyll-remote-theme
+
+        remote_theme: vszhub/not-pure-poole
+        ```
+
+## Usage
+
+You can read this [example post](https://vszhub.github.io/not-pure-poole/2020/09/29/welcome-to-not-pure-poole/) to see the rendering result in this theme, and put the [source](_posts/2020-09-29-welcome-to-not-pure-poole.md) aside to learn some basic usages.
+
+### Configuration
+
+The [`_config.yml`](_config.yml) file in this repository already contains some variables, you can try to override them in your repository.
+
+### Customizing Head
+
+Not Pure Poole leaves a placeholder to allow defining custom head, in principle, you can add anything here, e.g. favicons. All you need to do is just creating a file `_includes/custom-head.html` and put data into it.
+
+### Creating Themes
+
+If you want to make your own color schemes, modify the CSS variables in the `_sass/_variables.scss` stylesheet with a scoped data attribute or class name.
+
+For example, below we've created the beginnings of a blue theme:
+
 ```scss
---c-themePrimaryLight: #EFEFEF;
---c-themePrimaryDark:  #101010;
---c-themeSecondaryLight: #DADADA;
---c-themeSecondaryDark: #252525;
---c-themeTerniaryLight: #AEAEAE;
---c-themeTerniaryDark: #515151;
---c-themeQuaternaryLight: #919191;
---c-themeQuaternaryDark: #888888;
-
---c-themeHueRed: #C02717;
---c-themeHueGreen: #8EA604;
---c-themeHueBlue: #2E86AB;
---c-themeHueOrange: #E59500;
---c-themeHuePurple: #9F00CE;
---c-themeHueBrown: #230007;
-```
-These colors are CSS variables, usage: `var(--var-name)`
-
-## Add-ons
-Add-ons are distributed as Jekyll plugins. Just download any desired `.rb` file from the repository `_plugin` folder and put it in your `_plugin` folder.
-
-### Buttons (button.rb)
-Adds a tag to simplify insertion of buttons:
-```
-{% button red|https://www.example.com/|/assets/img/icons/cog.svg %}
-Download binary
-{% endbutton %}
+// Example blue theme
+[data-theme="blue"] {
+  --body-bg: var(--blue);
+  --body-color: #fff;
+}
 ```
 
-## 🤝 Contributing
- 
-Bug reports and pull requests are welcome on [GitHub](https://github.com/andreondra/jekyll-theme-simplex).
+Then, apply the theme by adding `data-theme="blue"` to the `<html>` element.
 
-## ⚙ Development
+### Customizing Navigation
+
+You can create a file `_data/navigation.yml` to configure links to some pages. For example,
+
+```yml
+- title: Blog
+  url: /
+- title: About
+  url: /about/
+```
+
+### Customizing Cover Image
+
+You can set your own cover image by modifying the `cover_image` variable in `_config.yml`, and you can also set different cover images on different pages by setting the `cover_image` variable on each page.
+
+If you discover that the contrast between the cover text color and the cover background color is not enough, you can also adjust these two variables:
+
+```yml
+cover_bg_color: rgb(40, 73, 77)
+cover_color: rgb(255, 255, 255)
+```
+
+### Customizing Social Links
+
+You can set your social links in `_data/social.yml`. You can custom titles, URLs, and icons (only support [Font Awesome](https://fontawesome.com/) currently), for example:
+
+```yml
+- title: Email
+  url: mailto://vszhub@gmail.com
+  icon: fas fa-envelope
+- title: Twitter
+  url: https://twitter.com/vszhub
+  icon: fab fa-twitter
+- title: GitHub
+  url: https://github.com/vszhub/not-pure-poole
+  icon: fab fa-github
+```
+
+### Enabling Posts Archive
+
+Not Pure Poole supports posts archive by date, categories, and tags. For enabling that, you should put some data like below into `_data/archive.yml`:
+
+```yml
+- type: dates
+  title: Dates
+  url: /dates/
+- type: categories
+  title: Categories
+  url: /categories/
+- type: tags
+  title: Tags
+  url: /tags/
+```
+
+After that, the navigation to these archive pages would be shown on the top of the homepage.
+
+Then, you can create a category archive page, and set the below parameters on that page:
+
+```yml
+---
+layout: archive-taxonomies
+type: categories
+---
+```
+
+Or a tag archive page:
+
+```yml
+layout: archive-taxonomies
+type: tags
+```
+
+Or archive by dates:
+
+```yml
+layout: archive-dates
+```
+
+### Enabling TOC
+
+If you want to show the TOC of a page on the right side, just set `toc: true` on that page.
+
+### Enabling MathJax
+
+If you want to write mathematics on a page, just set `math: true` on that page to enable MathJax.
+
+### Something More
+
+Just **hack** into the code and see what you can get.
+
+## Development
 
 To set up your environment to develop this theme, run `bundle install`.
 
 Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
-If you recieve an error stating, `"require': cannot load such file -- webrick (LoadError)'` Simply run `bundle add webrick` and this will install the dependencies for running the Jekyll and then you may repeat Step 2!
 
 When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
-To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-simplex.gemspec` accordingly.
+To add a custom directory to your theme-gem, please edit the regexp in `not-pure-poole.gemspec` accordingly.
 
-## Credits
-Includes icons by [uxwing](https://uxwing.com/).
+## License
 
-The lightbox feature is provided by [Lity](https://github.com/jsor/lity) licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-Uses [jQuery](https://github.com/jquery/jquery) JavaScript plugin licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## ⚖ License
-© Ondrej Golasowski. The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

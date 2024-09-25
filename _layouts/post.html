@@ -3,58 +3,51 @@ layout: default
 ---
 
 <article class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">
+    {%- assign date_format = site.date_format | default: "%-d %b %Y" -%}
+    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: date_format }}</time>
+    {%- if page.last_modified_at -%}
+      <span> ~ </span>
+      {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
+      <time datetime="{{ mdate }}" itemprop="dateModified">
+        {{ mdate | date: date_format }}
+      </time>
+    {%- endif -%}
+    {%- if page.author -%}
+      <span> • </span>
+      {% for author in page.author %}
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          {{ author }}
+        </span>
+        {%- if forloop.last == false %}, {% endif -%}
+      {% endfor %}
+    {%- endif -%}
+  </div>
 
-    <div class="post__title">
-        <h1 class="post__title__text">{{ page.title }}</h1>
-    </div>
-    <div class="post__meta"> 
-        <div class="post__meta__category">
-            {% for category in page.category %}
-                <p class="post__meta__category__title" style="background: {{ site.category | where: "category", category | map: "hue"}}">{{ site.category | where: "category", category | map: "title"}}</p>
-            {% else %}
-                <p class="post__meta__category__title">No category</p>
-            {% endfor %}
-        </div>
-        <p class="post__meta__divider">·</p>
-        <div class="post__meta__date">
-            {{ page.date | date: '%B %d, %Y' }}
-        </div>
-        {% if page.author != nil %}
-            {% assign author = site.authors | where: "nick", page.author | first %}
-            <p class="post__meta__divider">·</p>
-            <div class="post__meta__author">
-                <p>by </p>
-                <img class="post__meta__author__photo" src="{{ site.url }}/{{ author.photo_dir }}"/>
-                <p>{{ author.full_name }}</p>
-            </div>
-        {% endif %}
-    </div>
+  {{ content }}
 
-    {% if page.prevPart != nil or page.nextPart != nil %}
-        <div class="post__navigator">
-            <div
-                class="post__navigator__buttons"
-                {% if page.prevPart == nil %}
-                    style="justify-content: flex-end;"
-                {% endif %}
-            >
-                {% if page.prevPart != nil %}
-                    <a href="{% link {{ page.prevPart }} %}">
-                        <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
-                        Previous
-                    </a>
-                {% endif %}
-                {% if page.nextPart != nil %}
-                    <a href="{% link {{ page.nextPart }} %}">
-                        Next
-                        <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
+  {% if page.tags %}
+    {% include post-tags.html %}
+  {% endif %}
 
-    <div class="post__content">
-        {{ content }}
-    </div>
+  {% if jekyll.environment == "production" and site.disqus and page.comments != false %}
+    {% include disqus.html %}
+  {% endif %}
 </article>
+
+{% if site.related_posts != empty %}
+<aside class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:3 %}
+      <li>
+        <a href="{{ post.url | relative_url }}">
+          {{ post.title }}
+          <small><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></small>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %}

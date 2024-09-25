@@ -1,49 +1,12 @@
-<link rel="stylesheet" href="{{ site.url }}/assets/fonts/fonts.css"/>
-<link rel="stylesheet" href="{{ site.url }}/assets/style.css"/>
-<link rel="stylesheet" href="{{ site.url }}/assets/js/lity.min.css"/>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="{{ 'assets/styles.css' | relative_url }}">
 
-{% if site.favicon != nil %}
-<link rel='shortcut icon' type='image/x-icon' href='{{ site.favicon }}' />
-{% endif %}
+  {%- seo -%}
+  {%- feed_meta -%}
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta property="og:site_name" content="{{ site.title }}" />
-<meta 
-    property="og:title"
-    content="
-        {% if page.title != nil %}
-            {{page.title}}
-        {% else %}
-            {{site.title}}
-        {% endif %}
-    " 
-/>
-{% if page.og_description != nil %}
-    <meta property="og:description" content="{{ page.og_description }}" />
-{% endif %}
-<meta property="og:url" content="{{ site.url }}/{{ page.url }}" />
-{% if page.og_type != nil %}
-    <meta property="og:type" content="{{ page.og_type }}" />
-{% else %}
-    <meta property="og:type" content="article" />
-{% endif %}
-{% if page.og_image != nil %}
-    <meta property="og:image" content="{{ site.url }}/{{ page.og_image }}" />
-    <meta property="og:image:secure_url" content="{{ site.url }}/{{ page.og_image }}" />
-{% endif %}
-{% if page.fb_app_id != nil %}
-    <meta property="fb:app_id" content="{{ page.fb_app_id }}" />
-{% else if site.fb_app_id != nil %}
-    <meta property="fb:app_id" content="{{ site.fb_app_id }}" />
-{% endif %}
-
-
-<title>
-    {% if page.title != nil %}
-        {{page.title}}
-    {% else %}
-        {{site.title}}
-    {% endif %}
-</title>
+  {%- include custom-head.html -%}
+</head>
